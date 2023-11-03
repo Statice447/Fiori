@@ -1,0 +1,51 @@
+<mvc:View
+    controllerName="sap.btp.ux400solving.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <core:Fragment fragmentName="sap.btp.ux400solving.view.fragment.Products" />
+    <Page id="page" title="{i18n>title}">
+		<!-- VBOX 크기 조정 Margin을 사용하여 공간 띄우기-->
+        <VBox class="sapUiLargeMargin">
+            <Text text="버튼을 클릭하면 아래 Input 값이 랜덤으로 채워집니다."/>
+            <!-- Input change 함수 사용, 숫자만 입력을 위한 type 설정 -->
+            <Input id="inputID" 
+                change="onValueChange"
+                type="Number" />
+			<!-- Button press 사용 : 100이하 랜덤 정수 input 필드에 채우기 -->
+            <Button id="btn" text="Random" press="onRandomPress"/>
+        </VBox >
+		<!-- VBOX 크기 조정 Margin을 사용하여 공간 띄우기-->
+        <VBox width="50%" class="sapUiLargeMargin">
+			<!-- Table 속성 선언-->
+            <t:Table
+                id="table"
+                rows="{main>/list}"
+                selectionMode="MultiToggle"
+                paste="onPaste"
+                rowActionCount="1"
+                ariaLabelledBy="title">
+                <t:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title id="title" text="랜덤 목록 리스트"/>
+                        <ToolbarSpacer/>
+                        <Button text="Delete" icon="sap-icon://delete" press="onDelete"></Button>
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column width="auto">
+                        <Label text="value"/>
+						<!-- Model 이름 main인 객체에서 데이터 가져오기-->
+                        <t:template>
+                            <Input value="{main>result}"/>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+			<!-- Dialog 박스 불러오기 버튼 -->
+            <Button text="open product" press="onProduct" />
+        </VBox>        
+    </Page>
+</mvc:View>

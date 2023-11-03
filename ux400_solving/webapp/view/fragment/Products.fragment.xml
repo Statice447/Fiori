@@ -1,0 +1,107 @@
+<c:FragmentDefinition
+    xmlns:c="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <Dialog
+        id="idDialog"
+        contentWidth="90%"
+        contentHeight="60%"
+        title="Products"
+        draggable="true"
+        resizable="true">
+        <content>
+			<!-- Table 속성 선언 -->
+            <t:Table
+                id="idProducts"
+                rows="{/Products}"
+                selectionMode="Single"
+                selectionBehavior="RowOnly"
+                paste="onPaste"
+                ariaLabelledBy="title">
+				<!-- Column 속성 -->
+                <t:columns>
+                    <t:Column width="auto">
+                        <Label text="ProductID"/>
+                        <t:template>
+                            <Text text="{ProductID}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="ProductName"/>
+                        <t:template>
+                            <Text text="{ProductName}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="SupplierID"/>
+                        <t:template>
+                            <Text text="{SupplierID}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="CategoryID"/>
+                        <t:template>
+                            <Text text="{CategoryID}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="QuantityPerUnit"/>
+                        <t:template>
+                            <Text text="{QuantityPerUnit}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="UnitPrice"/>
+                        <t:template>
+                            <Text text="{UnitPrice}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="UnitsInStock"/>
+                        <t:template>
+                            <Text text="{UnitsInStock}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="UnitsOnOrder"/>
+                        <t:template>
+                            <Text text="{UnitsOnOrder}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="ReorderLevel"/>
+                        <t:template>
+                            <Text text="{ReorderLevel}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="Discontinued"/>
+                        <t:template>
+							<!-- Formatter 사용 -->
+                            <Text
+                                id = "disID"
+                                text="{
+                                         path: 'Discontinued' ,
+                                         formatter: '.transformDiscontinued'}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="Status"/>
+                        <t:template>
+							<!-- Icon 만들기 : 바인딩을 이용하여 조건 설정 -->
+                            <core:Icon
+                                src="{= ${UnitPrice} >= 15 ? 'sap-icon://thumb-up' : 'sap-icon://thumb-down' }"
+                                color="{= ${UnitPrice} >= 15 ? 'rgb(27, 234, 33)' : 'rgb(234, 52, 27)' }" > 
+                            </core:Icon>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </content>
+	        <endButton>
+			<!-- Dialog 박스 닫기 버튼 -->
+            <Button text="닫기" press="onClose"/>
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>
