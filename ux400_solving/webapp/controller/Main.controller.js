@@ -74,7 +74,7 @@ sap.ui.define(
                             loData.splice(id[i], 1);           
                     }
                     goModel.setProperty("/list", loData);     
-                    
+                      
                 }
             },
 
