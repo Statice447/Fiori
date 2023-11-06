@@ -164,9 +164,26 @@ sap.ui.define(
                 // 라우터 실행 버튼 이벤트
                 onNavDetail(oEvent){
                     let oRouter = this.getOwnerComponent().getRouter();
+                    debugger;
                     //           라우터 객체 이름
                     oRouter.navTo("RouteDetail", {
-                        OrderID : "hihi",       // 필수 파라미터
+                        OrderID : "HI",       // 필수 파라미터
+                        option : 123            // 선택 파라미터
+                    })    
+
+                },
+                onSelectDetail(oEvent){
+                    let oRouter = this.getOwnerComponent().getRouter();
+
+                    // 선택한 테이블의 리스트 아이템에서 함수로 경로찾기
+                    let select = oEvent.getParameters().listItem.getBindingContextPath();
+                    
+                    // 찾은 정보를 문자열 형태로 변경해주기 위해 변수 선언
+                    let order = String(this.getView().getModel().getProperty(select).OrderID);
+
+                    //           라우터 객체 이름
+                    oRouter.navTo("RouteDetail", {
+                        OrderID : order,       // 필수 파라미터
                         option : 123            // 선택 파라미터
                     })    
 

@@ -94,12 +94,18 @@
                     <ux:ObjectPageSubSection titleUppercase="false">
                         <ux:blocks>
                             <Table
+                                mode="SingleSelectMaster"
+                                selectionChange="onSelectDetail"
                                 id="idProductsTable"
                                 inset="false"
                                 items="{
 			                        path: '/Orders',
                                     filters: [],            
                                     sorter: [{
+				                        path: 'OrderID',
+                                        descending : false
+			                            },
+                                        {
 				                        path: 'EmployeeID',
                                         descending : false
 			                            },
@@ -115,7 +121,7 @@
                                         </content>
                                     </OverflowToolbar>
                                 </headerToolbar>
-                                <columns>
+                                <columns >
                                     <Column>
                                         <Text text="OrderID"/>
                                     </Column>
@@ -139,7 +145,7 @@
                                     </Column>
                                 </columns>
                                 <items>
-                                    <ColumnListItem vAlign="Middle">
+                                    <ColumnListItem vAlign="Middle" >
                                         <cells>
                                             <Text text="{OrderID}"/>
                                             <Text text="{CustomerID}"/>
@@ -216,7 +222,7 @@
                 <ux:subSections>
                     <ux:ObjectPageSubSection titleUppercase="false">
                         <ux:blocks>
-                            <Button text="라우터 실행" press="onNavDetail"></Button>
+                            <Button text="Deail view로" press="onNavDetail"></Button>
                         </ux:blocks>
                     </ux:ObjectPageSubSection>
                 </ux:subSections>

@@ -4,7 +4,11 @@
     displayBlock="true"
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
-    <Page >
-        <Text text="detail Page" />
+    <Page id="detail" title="">
+        <content>
+            <Input id="idDetailInput" value="detail Page"/>
+            <Button text="main으로" press="onNavMain"></Button>
+        </content>
+
     </Page>
 </mvc:View>
