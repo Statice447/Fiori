@@ -1,12 +1,10 @@
-sap
-    .ui
-    .define(
+sap.ui.define(
         [
             "sap/ui/core/mvc/Controller", 
             "sap/ui/model/json/JSONModel", 
             "sap/ui/core/format/DateFormat", 
             "sap/ui/core/Fragment",
-             "sap/ui/model/Filter"
+            "sap/ui/model/Filter"
         ],
         /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -30,18 +28,20 @@ sap
                     if (oData.OrderDate && oData.CustomerID) {
                         let oFilters = new Filter({
                             filters: [
-                                new Filter({
-                                    path: 'CustomerID',                
-                                    operator: 'EQ',                      
-                                    value1: oData.CustomerID,            
-                                    value2: '',                      
-                                }),
-                                new Filter({
-                                    path: 'OrderDate',               
-                                    operator: 'BT',                     
-                                    value1: oData.OrderDate,           
-                                    value2: oData.RequiredDate,                      
-                                })],
+                                // new Filter({
+                                //     path: 'CustomerID',                
+                                //     operator: 'EQ',                      
+                                //     value1: oData.CustomerID,            
+                                //     value2: '',                      
+                                // }),
+                                // new Filter({
+                                //     path: 'OrderDate',               
+                                //     operator: 'BT',                     
+                                //     value1: oData.OrderDate,           
+                                //     value2: oData.RequiredDate,                      
+                                // }),
+                                new Filter('CustomerID', 'EQ', oData.CustomerID),
+                                new Filter('OrderDate', 'BT', oData.OrderDate, oData.RequiredDate ),],
                                 and: true | false
                                 
                     })
@@ -159,6 +159,17 @@ sap
                     // let oinput = this.getView().byId("inputId");
                     // oinput.setValue(cusID);
                     // oEvent.getSource().getParent().close();
+                },
+
+                // 라우터 실행 버튼 이벤트
+                onNavDetail(oEvent){
+                    let oRouter = this.getOwnerComponent().getRouter();
+                    //           라우터 객체 이름
+                    oRouter.navTo("RouteDetail", {
+                        OrderID : "hihi",       // 필수 파라미터
+                        option : 123            // 선택 파라미터
+                    })    
+
                 }
 
             });

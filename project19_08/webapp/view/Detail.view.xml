@@ -1,0 +1,10 @@
+<mvc:View
+    controllerName="odata.project1908.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page >
+        <Text text="detail Page" />
+    </Page>
+</mvc:View>

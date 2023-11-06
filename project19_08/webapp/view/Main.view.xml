@@ -89,7 +89,7 @@
         </ux:headerContent>
 
         <ux:sections>
-            <ux:ObjectPageSection titleUppercase="false" title="Section 4">
+            <ux:ObjectPageSection titleUppercase="false" title="Products 조건 검색">
                 <ux:subSections>
                     <ux:ObjectPageSubSection titleUppercase="false">
                         <ux:blocks>
@@ -98,11 +98,7 @@
                                 inset="false"
                                 items="{
 			                        path: '/Orders',
-                                    filters: [{
-                                        path: 'CustomerID',                
-                                        operator: 'EQ',                      
-                                        value1: 'RICSU'
-                                    }],            
+                                    filters: [],            
                                     sorter: [{
 				                        path: 'EmployeeID',
                                         descending : false
@@ -176,7 +172,7 @@
                 </ux:subSections>
             </ux:ObjectPageSection>
 
-            <ux:ObjectPageSection titleUppercase="false" title="Section 5">
+            <ux:ObjectPageSection titleUppercase="false" title="Customers 조회">
                 <ux:subSections>
                     <ux:ObjectPageSubSection titleUppercase="false">
                         <ux:blocks>
@@ -214,5 +210,17 @@
                 </ux:subSections>
             </ux:ObjectPageSection>
         </ux:sections>
+
+        <ux:sections>
+            <ux:ObjectPageSection titleUppercase="false" title="라우터 실습">
+                <ux:subSections>
+                    <ux:ObjectPageSubSection titleUppercase="false">
+                        <ux:blocks>
+                            <Button text="라우터 실행" press="onNavDetail"></Button>
+                        </ux:blocks>
+                    </ux:ObjectPageSubSection>
+                </ux:subSections>
+            </ux:ObjectPageSection>
+            </ux:sections>
     </ux:ObjectPageLayout>
 </mvc:View>
