@@ -22,7 +22,7 @@
             <!-- <ObjectAttribute title="" text="This example explains the rules for the
             rendering of sections"/> -->
             <!-- <Input
-                id="inputId"
+                id="inputId2"
                 width="200px"
                 placeholder="Customer ID"
                 showValueHelp="true"
@@ -54,20 +54,16 @@
                         </fb:control>
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
-                        name="Category"
-                        label="Category"
+                        name="OrderDate"
+                        label="OrderDate"
                         groupName="Group1"
                         visibleInFilterBar="true">
                         <fb:control>
-                            <MultiComboBox
-                                name="Category"
-                                selectionChange=".onSelectionChange"
-                                items="{
-												path: '/ProductCategories',
-												templateShareable: true
-											}">
-                                <core:Item key="{key}" text="{name}"/>
-                            </MultiComboBox>
+                        <!-- 날짜 검색 -->
+                        <!-- dateValue = from, secondDateValue = to -->
+                            <DateRangeSelection displayFormat="yyyy-MM-dd" 
+                                                dateValue="{main>/OrderDate}" 
+                                                secondDateValue="{main>/RequiredDate}"/>
                         </fb:control>
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
@@ -102,9 +98,19 @@
                                 inset="false"
                                 items="{
 			                        path: '/Orders',
-                                    sorter: {
-				                        path: 'OrderID'
-			                            }
+                                    filters: [{
+                                        path: 'CustomerID',                
+                                        operator: 'EQ',                      
+                                        value1: 'RICSU'
+                                    }],            
+                                    sorter: [{
+				                        path: 'EmployeeID',
+                                        descending : false
+			                            },
+                                        {
+				                        path: 'OrderDate',
+                                        descending : true
+			                            }]
 		                            }">
                                 <headerToolbar>
                                     <OverflowToolbar>

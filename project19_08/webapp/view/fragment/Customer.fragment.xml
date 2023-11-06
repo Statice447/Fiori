@@ -10,6 +10,7 @@
             <t:Table
                 id="idCustomers"
                 rows="{/Customers}"
+                rowSelectionChange="onRowSelectionChange"   
                 selectionMode="Single"
                 selectionBehavior="RowOnly"
                 paste="onPaste"
@@ -36,9 +37,9 @@
                 </t:columns>
             </t:Table>
         </content>
-        <Button text="confirm" press="onSelect"></Button>
+        <Button id="idCustConfirm" text="confirm" press="onSelect"></Button>
         <endButton>
-            <Button text="close" press="onClose"/>
+            <Button id="idCustClose" text="close" press="onClose"/>
         </endButton>
     </Dialog>
 </c:FragmentDefinition>
