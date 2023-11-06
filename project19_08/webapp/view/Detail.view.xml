@@ -4,7 +4,9 @@
     displayBlock="true"
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
-    <Page id="detail" title="">
+    <Page id="detail" title="" 		
+        showNavButton="true"
+		navButtonPress="onBack">
         <content>
             <Input id="idDetailInput" value="detail Page"/>
             <Button text="main으로" press="onNavMain"></Button>

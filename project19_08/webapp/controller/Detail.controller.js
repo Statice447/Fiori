@@ -4,12 +4,13 @@ sap.ui.define(
         "sap/ui/model/json/JSONModel", 
         "sap/ui/core/format/DateFormat", 
         "sap/ui/core/Fragment",
-         "sap/ui/model/Filter"
+        "sap/ui/model/Filter",
+        "sap/ui/core/routing/History"
     ],
     /**
  * @param {typeof sap.ui.core.mvc.Controller} Controller
  */
-    function (Controller, JSONModel, DateFormat, Fragment, Filter) {
+    function (Controller, JSONModel, DateFormat, Fragment, Filter, History) {
         "use strict";
 
         return Controller.extend("odata.project1908.controller.Detail", {
@@ -26,15 +27,21 @@ sap.ui.define(
                 let oArgu = oEvent.getParameters().arguments;
                 // oArgu에는 { OrderID : 'HI', operion : 123}이 들어있음
 
-                this.byId("detail").setTitle(oArgu.OrderID);
-                this.byId("idDetailInput").setValue(oArgu.option);
+                this.byId("detail").setTitle("OrderID : " + oArgu.OrderID);
+                this.byId("idDetailInput").setValue("CustomID : " + oArgu.option);
 
             },
 
-            onNavMain(){
-                let oRouter = this.getOwnerComponent().getRouter();
-                //           라우터 객체 이름
-                oRouter.navTo("RouteMain");
+            onBack(){
+                let oHistory = History.getInstance();
+			    let sPreviousHash = oHistory.getPreviousHash();
+
+                if (sPreviousHash !== undefined) {
+                    window.history.go(-1);
+                } else {
+                    let oRouter = this.getOwnerComponent().getRouter();
+                    oRouter.navTo("overview", {}, true);
+                }
 
             }
 

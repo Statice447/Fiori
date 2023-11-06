@@ -4,12 +4,13 @@ sap.ui.define(
             "sap/ui/model/json/JSONModel", 
             "sap/ui/core/format/DateFormat", 
             "sap/ui/core/Fragment",
-            "sap/ui/model/Filter"
+            "sap/ui/model/Filter",
+            "sap/ui/core/routing/History"
         ],
         /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-        function (Controller, JSONModel, DateFormat, Fragment, Filter) {
+        function (Controller, JSONModel, DateFormat, Fragment, Filter, History) {
             "use strict";
 
             return Controller.extend("odata.project1908.controller.Main", {
@@ -176,15 +177,16 @@ sap.ui.define(
                     let oRouter = this.getOwnerComponent().getRouter();
 
                     // 선택한 테이블의 리스트 아이템에서 함수로 경로찾기
-                    let select = oEvent.getParameters().listItem.getBindingContextPath();
+                    let selectPath = oEvent.getParameters().listItem.getBindingContextPath();
                     
-                    // 찾은 정보를 문자열 형태로 변경해주기 위해 변수 선언
-                    let order = String(this.getView().getModel().getProperty(select).OrderID);
+                    // 찾은 경로를 getProperty로 데이터 취득
+                    let orderID = this.getView().getModel().getProperty(selectPath).OrderID;
+                    let custID = this.getView().getModel().getProperty(selectPath).CustomerID;
 
                     //           라우터 객체 이름
                     oRouter.navTo("RouteDetail", {
-                        OrderID : order,       // 필수 파라미터
-                        option : 123            // 선택 파라미터
+                        OrderID : orderID,       // 필수 파라미터
+                        option : custID          // 선택 파라미터
                     })    
 
                 }
