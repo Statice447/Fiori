@@ -1,0 +1,200 @@
+<mvc:View controllerName="mentor2.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:ux="sap.uxap"
+    xmlns:fb="sap.ui.comp.filterbar">
+
+<core:Fragment fragmentName="mentor2.view.fragment.Customers" type="XML"/>
+
+<ux:ObjectPageLayout
+        id="ObjectPageLayout"
+        useIconTabBar="true"
+        upperCaseAnchorBar="false">
+
+        <ux:headerTitle>
+            <ux:ObjectPageHeader objectTitle="Section 실습"></ux:ObjectPageHeader>
+        </ux:headerTitle>
+
+        <ux:headerContent>
+            <fb:FilterBar
+                id="filterbar"
+                filterContainerWidth="24rem"
+                persistencyKey="myPersKey"
+                useToolbar="false"
+                search=".onSearch"
+                filterChange=".onFilterChange"
+                afterVariantLoad=".onAfterVariantLoad">
+                <fb:filterGroupItems>
+                    <fb:FilterGroupItem
+                        name="CustomerID"
+                        label="CustomerID"
+                        groupName="Group1"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <Input
+                                id="inputId"
+                                width="200px"
+                                placeholder="Customer ID"
+                                showValueHelp="true"
+                                value="{main>/CustomerID}"
+                                valueHelpRequest="onValueHelp"/>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem
+                        name="OrderDate"
+                        label="OrderDate"
+                        groupName="Group1"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                        <!-- 날짜 검색 -->
+                        <!-- dateValue = from, secondDateValue = to -->
+                            <DateRangeSelection displayFormat="yyyy-MM-dd" 
+                                                dateValue="{main>/OrderDate}" 
+                                                secondDateValue="{main>/RequiredDate}"/>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+        </ux:headerContent>
+
+        <ux:sections>
+            <ux:ObjectPageSection titleUppercase="false" title="Products Order">
+                <ux:subSections>
+                    <ux:ObjectPageSubSection titleUppercase="false">
+                        <ux:blocks>
+                            <Table
+                                mode="SingleSelectMaster"
+                                selectionChange="onSelectDetail"
+                                id="idProductsTable"
+                                inset="false"
+                                items="{
+			                        path: '/Orders',
+                                    filters: [],            
+                                    sorter: [{
+				                        path: 'OrderID',
+                                        descending : false
+			                            }
+                                        ]
+		                            }">
+                                <headerToolbar>
+                                    <OverflowToolbar>
+                                        <content>
+                                            <Title text="Products" level="H2"/>
+                                        </content>
+                                    </OverflowToolbar>
+                                </headerToolbar>
+                                <columns >
+                                    <Column>
+                                        <Text text="OrderID"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="CustomerID"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="EmployeeID"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="OrderDate"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="RequiredDate"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="ShippedDate"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Freight Sum"/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem vAlign="Middle" >
+                                        <cells>
+                                            <Text text="{OrderID}"/>
+                                            <Text text="{CustomerID}"/>
+                                            <Text text="{EmployeeID}"/>
+                                            <Text
+                                                text="{
+                                                    path: 'OrderDate',
+                                                    formatter: '.formatter.fnDateToString'}"/>
+                                            <Text
+                                                text="{
+                                                    path: 'RequiredDate',
+                                                    formatter: '.formatter.fnDateToString'}"/>
+                                            <Text
+                                                text="{
+                                                    path: 'ShippedDate',
+                                                    formatter: '.formatter.fnDateToString'}"/>
+                                            <Text
+                                                text="{
+                                                parts : [
+                                                    { path: 'ShipVia'},
+                                                    { path: 'Freight'}
+                                                ],
+                                                formatter: '.formatter.fnFreightSum'}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </ux:blocks>
+                    </ux:ObjectPageSubSection>
+                </ux:subSections>
+            </ux:ObjectPageSection>
+
+            <ux:ObjectPageSection titleUppercase="false" title="Customers 조회">
+                <ux:subSections>
+                    <ux:ObjectPageSubSection titleUppercase="false">
+                        <ux:blocks>
+                            <Table id="idCustomersTable" 
+                                    mode="SingleSelectMaster"
+                                    selectionChange="onSelectDetail"
+                                    inset="false" 
+                                    items="{path: '/Customers'}">
+                                <headerToolbar>
+                                    <OverflowToolbar>
+                                        <content>
+                                            <Title text="Customers" level="H2"/>
+                                        </content>
+                                    </OverflowToolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column>
+                                        <Text text="CustomerID"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="CompanyName"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Country"/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem vAlign="Middle">
+                                        <cells>
+                                            <Text text="{CustomerID}"/>
+                                            <Text text="{CompanyName}"/>
+                                            <Text text="{Country}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </ux:blocks>
+                    </ux:ObjectPageSubSection>
+                </ux:subSections>
+            </ux:ObjectPageSection>
+        </ux:sections>
+
+        <ux:sections>
+            <ux:ObjectPageSection titleUppercase="false" title="라우터 실습">
+                <ux:subSections>
+                    <ux:ObjectPageSubSection titleUppercase="false">
+                        <ux:blocks>
+                            <Button text="Deail view로" press="onNavDetail"></Button>
+                        </ux:blocks>
+                    </ux:ObjectPageSubSection>
+                </ux:subSections>
+            </ux:ObjectPageSection>
+            </ux:sections>
+    </ux:ObjectPageLayout>
+</mvc:View>

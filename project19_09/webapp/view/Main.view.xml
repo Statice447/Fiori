@@ -1,0 +1,67 @@
+<mvc:View controllerName="project1909.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <!-- vizType : 차트 타입 설정 -->
+            <viz:VizFrame vizType="line">
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{view>/list}">
+                        <!-- X축 -->
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="이름" value="{name}" />
+                        </viz.data:dimensions>
+
+                        <!-- Y축 -->
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition  name="Rate" value="{rate}" />
+                            <viz.data:MeasureDefinition  name="Cost" value="{cost}"/>
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+
+                <viz:feeds>
+                <!-- 
+                    uid 세팅 참고
+                    line, column, bar ... => categotyAxis + valueAxis
+                    pie, donut, ... => color + size
+                -->
+                    <viz.feeds:FeedItem id='NameAxisFeed' uid="categoryAxis" type="Dimension" values="이름" />  <!-- X축 -->
+                    <viz.feeds:FeedItem id='RateAxisFeed' uid="valueAxis" type="Measure" values="Rate" />       <!-- Y축 -->
+                    <viz.feeds:FeedItem id='CostAxisFeed' uid="valueAxis" type="Measure" values="Cost" />       <!-- Y축 -->
+                </viz:feeds>
+            </viz:VizFrame>
+
+            <viz:VizFrame vizType="pie">
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{view>/list}">
+                        <!-- X축 -->
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="이름" value="{name}" />
+                        </viz.data:dimensions>
+
+                        <!-- Y축 -->
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition  name="Rate" value="{rate}" />
+                            <viz.data:MeasureDefinition  name="Cost" value="{cost}"/>
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+
+                <viz:feeds>
+                <!-- 
+                    uid 세팅 참고
+                    line, column, bar ... => categotyAxis + valueAxis
+                    pie, donut, ... => color + size
+                -->
+                    <viz.feeds:FeedItem id='NameAxisFeed2' uid="color" type="Dimension" values="이름" />  <!-- X축 -->
+                    <viz.feeds:FeedItem id='RateAxisFeed2' uid="size" type="Measure" values="Rate" />       <!-- Y축 -->
+                    <viz.feeds:FeedItem id='CostAxisFeed2' uid="size" type="Measure" values="Cost" />       <!-- Y축 -->
+                </viz:feeds>
+            </viz:VizFrame>
+        </content>
+    </Page>
+</mvc:View>

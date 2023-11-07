@@ -2,39 +2,42 @@ sap.ui.define(
     [
         "sap/ui/core/mvc/Controller", 
         "sap/ui/model/json/JSONModel", 
+        "sap/ui/core/format/DateFormat", 
+        "sap/ui/core/Fragment",
         "sap/ui/model/Filter",
         "sap/ui/core/routing/History"
     ],
     /**
  * @param {typeof sap.ui.core.mvc.Controller} Controller
  */
-    function (Controller, JSONModel, Filter, History) {
+    function (Controller, JSONModel, DateFormat, Fragment, Filter, History) {
         "use strict";
 
-        return Controller.extend("odata.project1908.controller.Detail", {
+        return Controller.extend("mentor2.controller.Shipment", {
             onInit: function () {
                 let oRouter = this.getOwnerComponent().getRouter();
+                let oModel = new JSONModel();
+
                 //           라우터 객체 이름
-                oRouter.getRoute('RouteDetail').attachPatternMatched(this._patternMatched, this);
+                oRouter.getRoute('RouteShipment').attachPatternMatched(this._patternMatched, this);
+
+                this.getView().setModel(oModel, "orders");
 
             },
 
             // 라우터 패턴이 "일치할때마다" 실행
             _patternMatched(oEvent){
                 // 이벤트 객체의 파라미터 정보에 arguments에서 객체 데이터 취득
+                debugger;
                 let oArgu = oEvent.getParameters().arguments;
+                let oFilter = new Filter('CustomerID', 'EQ', oArgu.CustomID);
                 // oArgu에는 { OrderID : 'HI', operion : 123}이 들어있음
 
-                this.byId("detail").setTitle("OrderID : " + oArgu.OrderID);
-                this.byId("idDetailInput").setValue("CustomID : " + oArgu.option);
-
-                // 'Orders(번호)' 데이터 바인딩 ( ' 아님 ` 이거임)
-                // 엘리먼트 바인딩
-                this.getView().bindElement(`/Orders(${oArgu.OrderID})`);
-
-                this.getView().getModel().read(`/Orders(${oArgu.OrderID})`, {
+                this.getView().getModel().read(`/Orders(${oArgu.CustomID})`, {
+                    filters: [oFilter],
                     success : function(oReturn){
                         oReturn.results;
+                        debugger;
                     }
                 })
 
@@ -53,20 +56,8 @@ sap.ui.define(
                     oRouter.navTo("RouteMain", {});
                 }
 
-            },
-            
-            onRead(oEvent){
-                let oDataModel = this.getView().getModel();
-                let oFilter = new Filter('CustomerID', 'EQ', 'VINET');
-                
-                oDataModel.read("/Orders",{
-                    filters : [oFilter],
-                    success : function(oReturn){
-                        oReturn.results;
-                        debugger;
-                    }
-                });
             }
+
         });
     }
 );

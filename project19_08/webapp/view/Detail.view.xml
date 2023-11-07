@@ -11,6 +11,13 @@
             <Input id="idDetailInput" value="detail Page"/>
             <Button text="main으로" press="onNavMain"></Button>
         </content>
+        <VBox >
+            <Text text="{OrderID}" />
+            <Text text="{CustomerID}" />
+            <Text text="{ShipName}"/>
+            <Text text="{ShipAddress}"/>
+            <Button id="idDetailButton" text="123" press="onRead" />
+        </VBox>
 
     </Page>
 </mvc:View>

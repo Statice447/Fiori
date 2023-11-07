@@ -1,0 +1,63 @@
+<mvc:View
+    controllerName="mentor2.controller.Shipment"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:ux="sap.uxap"
+    xmlns:fb="sap.ui.comp.filterbar">
+    <Page >
+        <Table
+                                mode="SingleSelectMaster"
+                                id="idOrderTable"
+                                inset="false"
+                                items="{
+			                        path: '/Orders',          
+                                    sorter: [{
+				                        path: 'OrderID',
+                                        descending : false
+			                            }]
+		                            }">
+                                <headerToolbar>
+                                    <OverflowToolbar>
+                                        <content>
+                                            <Title text="Customer Orders" level="H2"/>
+                                        </content>
+                                    </OverflowToolbar>
+                                </headerToolbar>
+                                <columns >
+                                    <Column>
+                                        <Text text="CustomerID"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="OrderID"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="ShipName"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="ShipAddress"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="ShippedDate"/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem vAlign="Middle" >
+                                        <cells>
+                                            <Text text="{CustomerID}"/>
+                                            <Text text="{OrderID}"/>
+                                            <Text text="{ShipName}"/>
+                                            <Text text="{ShipAddress}"/>
+                                            <Text text="{ShipName}"/>
+                                            <Text
+                                                text="{
+                                                    path: 'ShippedDate',
+                                                    formatter: '.formatter.fnDateToString'}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+    </Page>
+
+</mvc:View>
