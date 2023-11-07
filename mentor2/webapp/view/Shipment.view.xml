@@ -6,6 +6,7 @@
     xmlns:core="sap.ui.core"
     xmlns:ux="sap.uxap"
     xmlns:fb="sap.ui.comp.filterbar">
+    
     <Page >
         <Table
                                 mode="SingleSelectMaster"
