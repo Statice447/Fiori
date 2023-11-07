@@ -7,7 +7,28 @@
     <Page id="page" title="{i18n>title}">
         <content>
             <!-- vizType : 차트 타입 설정 -->
-            <viz:VizFrame vizType="line">
+            <viz:VizFrame   vizType="stacked_column"
+                            legendVisible="true"
+                            vizProperties="{
+                                    'title' : {
+                                        'visible' : true,
+                                        'text' : 'My First Chart'
+                                        },
+
+                                    'legendGroup' : {
+                                        'layout' : {'position' : 'left'}
+                                    },
+                                    
+                                    'plotArea' : {
+                                        'drawingEffect' : 'glossy',
+                                        'dataLabel' : { 
+                                            visible : true,
+                                            type : 'value'
+                                        },
+                                        'colorPalette' : ['#86E57F', '#00D8FF']
+                                        
+                                    }
+                                }">
                 <viz:dataset>
                     <viz.data:FlattenedDataset data="{view>/list}">
                         <!-- X축 -->
@@ -30,8 +51,8 @@
                     pie, donut, ... => color + size
                 -->
                     <viz.feeds:FeedItem id='NameAxisFeed' uid="categoryAxis" type="Dimension" values="이름" />  <!-- X축 -->
-                    <viz.feeds:FeedItem id='RateAxisFeed' uid="valueAxis" type="Measure" values="Rate" />       <!-- Y축 -->
-                    <viz.feeds:FeedItem id='CostAxisFeed' uid="valueAxis" type="Measure" values="Cost" />       <!-- Y축 -->
+                    <viz.feeds:FeedItem id='RateAxisFeed' uid="valueAxis" type="Measure" values="Rate,Cost" />       <!-- Y축 -->
+                    <!-- <viz.feeds:FeedItem id='CostAxisFeed' uid="valueAxis" type="Measure" values="Cost" />       Y축 -->
                 </viz:feeds>
             </viz:VizFrame>
 
@@ -61,6 +82,10 @@
                     <viz.feeds:FeedItem id='RateAxisFeed2' uid="size" type="Measure" values="Rate" />       <!-- Y축 -->
                     <viz.feeds:FeedItem id='CostAxisFeed2' uid="size" type="Measure" values="Cost" />       <!-- Y축 -->
                 </viz:feeds>
+            </viz:VizFrame>
+
+            <!-- Controller 에서 만들기-->
+            <viz:VizFrame id="idChart"  vizType="column">
             </viz:VizFrame>
         </content>
     </Page>
