@@ -1,0 +1,206 @@
+<mvc:View
+    controllerName="project1910.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:common="sap.suite.ui.commons"
+    xmlns:core="sap.ui.core"
+    xmlns:mc="sap.suite.ui.microchart"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <!-- vizType : 차트 타입 설정 -->
+        <viz:VizFrame
+            vizType="area"
+            legendVisible="true"
+            vizProperties="{
+                                    'title' : {
+                                        'visible' : true,
+                                        'text' : 'Lab vizFrame Chart'
+                                        },
+
+                                    'plotArea' : {
+                                        'drawingEffect' : 'glossy',
+                                        'colorPalette' : ['#86E57F', '#00D8FF']
+                                    }
+                                }">
+            <viz:dataset>
+                <viz.data:FlattenedDataset data="{main>/Products}">
+                    <!-- X축 -->
+                    <viz.data:dimensions>
+                        <viz.data:DimensionDefinition name="Country" value="{Country}"/>
+                    </viz.data:dimensions>
+
+                    <!-- Y축 -->
+                    <viz.data:measures>
+                        <viz.data:MeasureDefinition name="Revenue" value="{Revenue}"/>
+                        <viz.data:MeasureDefinition name="Revenue2" value="{Revenue2}"/>
+                    </viz.data:measures>
+                </viz.data:FlattenedDataset>
+            </viz:dataset>
+
+            <viz:feeds>
+                <!-- uid 세팅 참고 line, column, bar ... => categotyAxis + valueAxis pie, donut, ...
+                => color + size -->
+                <viz.feeds:FeedItem
+                    id='NameAxisFeed'
+                    uid="categoryAxis"
+                    type="Dimension"
+                    values="Country"/>
+                <!-- X축 -->
+                <viz.feeds:FeedItem
+                    id='RateAxisFeed'
+                    uid="valueAxis"
+                    type="Measure"
+                    values="Revenue,Revenue2"/>
+                <!-- Y축 -->
+            </viz:feeds>
+        </viz:VizFrame>
+
+        <common:ChartContainer
+            id="idChartContainer"
+            showFullScreen="true"
+            showPersonalization="true"
+            autoAdjustHeight="false"
+            title="Revenue">
+            <common:content>
+                <common:ChartContainerContent icon="sap-icon://SAP-icons-TNT/value-type" title="Chart Container">
+                    <common:content>
+                    <!-- 차트 컨테이너 안 vizFrame 작성-->
+                        <viz:VizFrame
+                            vizType="bar"
+                            legendVisible="true"
+                            vizProperties="{
+                                'title' : {
+                                        'visible' : true,
+                                        'text' : 'Chart Conatainer'
+                                        },
+                                    'plotArea' : {
+                                        'drawingEffect' : 'glossy',
+                                        'colorPalette' : ['#86E57F', '#00D8FF']
+                                    }
+                                }">
+                            <viz:dataset>
+                                <viz.data:FlattenedDataset data="{main>/Products}">
+                                    <!-- X축 -->
+                                    <viz.data:dimensions>
+                                        <viz.data:DimensionDefinition name="Country" value="{Country}"/>
+                                    </viz.data:dimensions>
+
+                                    <!-- Y축 -->
+                                    <viz.data:measures>
+                                        <viz.data:MeasureDefinition name="Revenue" value="{Revenue}"/>
+                                        <viz.data:MeasureDefinition name="Revenue2" value="{Revenue2}"/>
+                                    </viz.data:measures>
+                                </viz.data:FlattenedDataset>
+                            </viz:dataset>
+
+                            <viz:feeds>
+                                <!-- uid 세팅 참고 line, column, bar ... => categotyAxis + valueAxis pie, donut, ...
+                                => color + size -->
+                                <viz.feeds:FeedItem
+                                    id='NameAxisFeed2'
+                                    uid="categoryAxis"
+                                    type="Dimension"
+                                    values="Country"/>
+                                <!-- X축 -->
+                                <viz.feeds:FeedItem
+                                    id='RateAxisFeed2'
+                                    uid="valueAxis"
+                                    type="Measure"
+                                    values="Revenue,Revenue2"/>
+                                <!-- Y축 -->
+                            </viz:feeds>
+                        </viz:VizFrame>
+                    </common:content>
+                </common:ChartContainerContent>
+                <common:ChartContainerContent icon="sap-icon://table-view" title="Table">
+                    <common:content>
+                        <Table id="idTable" items="{main>/Products}">
+                            <headerToolbar>
+                                    <OverflowToolbar>
+                                        <content>
+                                            <Title text="Products" level="H2"/>
+                                        </content>
+                                    </OverflowToolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column>
+                                        <Text text="Country"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Profit"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Forcast"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Target"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Revenue"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Revenue2"/>
+                                    </Column>
+                                     <Column>
+                                        <Text text="Revenue3"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Micro"/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem vAlign="Middle">
+                                        <cells>
+                                            <Text text="{main>Country}"/>
+                                            <Text text="{main>Profit}"/>
+                                            <Text text="{main>Forcast}"/>
+                                            <Text text="{main>Target}"/>
+                                            <Text text="{main>Revenue}"/>
+                                            <Text text="{main>Revenue2}"/>
+                                            <Text text="{main>Revenue3}"/>
+                                            <mc:RadialMicroChart size="M" 
+                                                percentage="{= (${main>Revenue}+${main>Revenue2}+${main>Revenue3})/100}" 
+                                                valueColor="{= ((${main>Revenue}+${main>Revenue2}+${main>Revenue3})/100) >= 5 ? 'Good' : 'Error' }" 
+                                                class="sapUiSmallMargin" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                        </Table>
+                    </common:content>
+                </common:ChartContainerContent>
+            </common:content>
+            <common:customIcons>
+                <core:Icon
+                    id="customIcon"
+                    src="sap-icon://print"
+                    tooltip="Custom Content Print"
+                    press="onCustomActionPress"></core:Icon>
+            </common:customIcons>
+            <common:toolbar>
+                <OverflowToolbar id="appToolbar">
+                    <Button
+                        id="btnAction1"
+                        text="CustomAction"
+                        type="Transparent"
+                        press="onCustomActionPress"></Button>
+                    <ToolbarSpacer/>
+                    <Button
+                        id="btnAction2"
+                        text="CustomAction"
+                        type="Transparent"
+                        press="onCustomActionPress"></Button>
+                    <common:ChartContainerToolbarPlaceholder></common:ChartContainerToolbarPlaceholder>
+                </OverflowToolbar>
+            </common:toolbar>
+            <common:dimensionSelectors>
+                <Select id="idSelector">
+                    <core:Item key="0" text="Sales by Country"/>
+                </Select>
+            </common:dimensionSelectors>
+        </common:ChartContainer>
+         <viz:VizFrame id="idChart"  vizType="combination" />
+    </Page>
+</mvc:View>
