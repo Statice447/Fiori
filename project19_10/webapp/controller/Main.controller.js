@@ -75,8 +75,8 @@ sap.ui.define([
 
                 // (Optional) property setting
                 oChart.setVizProperties({
-                    title : { text : 'Contorller vizFrame' }
-                    // plotArea : { colorPalette : ['#00D8FF'] }
+                    title : { text : 'Contorller vizFrame' },
+                    plotArea : { colorPalette : ['#00D8FF', '#000000', '#FF00DD'] }
 
                 })
 
