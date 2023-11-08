@@ -62,6 +62,7 @@
                                         id="idComboType"
                                         required="true"
                                         name="Type"
+                                        value="bar"
                                         selectionChange=".onSelectionChange"
                                         showSecondaryValues="true"
                                         items="{
@@ -126,8 +127,6 @@
                         values="UnitPrice"/>
                     <!-- Y축 -->
                 </viz:feeds>
-                <viz:dependents>
-                </viz:dependents>
             </viz:VizFrame>
             
         </f:content>

@@ -22,11 +22,12 @@ sap.ui.define([
             _patternMatched(oEvent){
                 // 이벤트 객체의 파라미터 정보에 arguments에서 객체 데이터 취득
                 let oArgu = oEvent.getParameters().arguments;
+                debugger;
 
                 this.byId("idTitle").setText("OrderID : " + oArgu.OrderID);
                 let oJSONModel = this.getView().getModel('main');
 
-                // Filter 사용 방법
+                // Filters 사용 방법
                 // let afilter = [];
                 // if (oArgu.OrderID && oArgu.ProductID) {
                 //     var oFilters = new Filter({
@@ -52,11 +53,10 @@ sap.ui.define([
                 // })
 
                 // 'Orders(번호)' 데이터 바인딩 ( ' 아님 ` 이거임)
-
+                
                 this.getView().getModel().read(`/Order_Details(OrderID=${oArgu.OrderID},ProductID=${oArgu.ProductID})`, {
                     success : function(oReturn){
                         // 서버에서 얻은 값을 success 함수의 파라미터 변수 값에서 JSON Data 형태로 얻을 수 있다.
-                        
                         oJSONModel.setProperty("/", oReturn);           // 1. 
                         // oJSONModel.setData(oReturn);                 // 2.
                         // this.getView().getModel().setData(oReturn);  // 3. 쓸려면 마지막에 .bind(this) 를 쓴다

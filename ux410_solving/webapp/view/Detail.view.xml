@@ -20,17 +20,24 @@
                     <ux:expandedHeading>
                         <Title id="idTitle" text="" wrapping="true"/>
                     </ux:expandedHeading>
-                    <ux:expandedContent>
-                        <Text text="Order Detail View Details"/>
-                    </ux:expandedContent>
+
                 </ux:ObjectPageDynamicHeaderTitle>
             </ux:headerTitle>
+
+            <ux:headerContent>
+                <FlexBox wrap="Wrap">
+                    <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                        <Label text="Order detail view detail"/>
+                    </layout:VerticalLayout>
+                </FlexBox>
+            </ux:headerContent>
+            
             <ux:sections>
                 <ux:ObjectPageSection titleUppercase="false" title="Info">
                     <ux:subSections >
-                        <ux:ObjectPageSubSection  >
+                        <ux:ObjectPageSubSection >
                             <ux:blocks >
-                                <VBox class="sapUiSmallMargin"  >
+                                <VBox class="sapUiSmallMargin">
                                     <f:SimpleForm
                                         id="SimpleForm"
                                         editable="false"
