@@ -27,10 +27,10 @@
             </ux:headerTitle>
             <ux:sections>
                 <ux:ObjectPageSection titleUppercase="false" title="Info">
-                    <ux:subSections>
-                        <ux:ObjectPageSubSection >
-                            <ux:blocks>
-                                <VBox class="sapUiSmallMargin">
+                    <ux:subSections >
+                        <ux:ObjectPageSubSection  >
+                            <ux:blocks >
+                                <VBox class="sapUiSmallMargin"  >
                                     <f:SimpleForm
                                         id="SimpleForm"
                                         editable="false"
