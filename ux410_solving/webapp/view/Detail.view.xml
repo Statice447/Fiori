@@ -1,0 +1,63 @@
+<mvc:View
+    controllerName="sap.btp.ux410solving.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:ux="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m">
+    <Page showNavButton="true" navButtonPress="onBack">
+        <ux:ObjectPageLayout
+            id="ObjectPageLayout"
+            enableLazyLoading="true"
+            beforeNavigate="onBeforeNavigate"
+            useIconTabBar="true"
+            showTitleInHeaderContent="true"
+            upperCaseAnchorBar="false"
+            sectionChange="onSectionChange">
+            <ux:headerTitle>
+                <ux:ObjectPageDynamicHeaderTitle>
+                    <ux:expandedHeading>
+                        <Title id="idTitle" text="" wrapping="true"/>
+                    </ux:expandedHeading>
+                    <ux:expandedContent>
+                        <Text text="Order Detail View Details"/>
+                    </ux:expandedContent>
+                </ux:ObjectPageDynamicHeaderTitle>
+            </ux:headerTitle>
+            <ux:sections>
+                <ux:ObjectPageSection titleUppercase="false" title="Info">
+                    <ux:subSections>
+                        <ux:ObjectPageSubSection >
+                            <ux:blocks>
+                                <VBox class="sapUiSmallMargin">
+                                    <f:SimpleForm
+                                        id="SimpleForm"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        title="Info"
+                                        singleContainerFullSize="false">
+                                        <f:content>
+                                            <Label text="OrderID"/>
+                                            <Text text="{main>/OrderID}"/>
+                                            <Label text="ProductID"/>
+                                            <Text text="{main>/ProductID}"/>
+                                            <Label text="UnitPrice"/>
+                                            <Text text="{main>/UnitPrice}"/>
+                                            <Label text="Quantity"/>
+                                            <Text text="{main>/Quantity}"/>
+                                            <Label text="Discount"/>
+                                            <Text text="{main>/Discount}"/>
+                                        </f:content>
+                                    </f:SimpleForm>
+                                </VBox>
+                            </ux:blocks>
+                        </ux:ObjectPageSubSection>
+                    </ux:subSections>
+                </ux:ObjectPageSection>
+            </ux:sections>
+        </ux:ObjectPageLayout>
+
+    </Page>
+
+</mvc:View>
