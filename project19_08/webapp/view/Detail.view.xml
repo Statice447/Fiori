@@ -17,7 +17,7 @@
             <Text text="{ShipName}"/>
             <Text text="{ShipAddress}"/>
             <Button id="idDetailButton" text="123" press="onRead" />
-        </VBox>
+        </VBox> 
 
     </Page>
 </mvc:View>

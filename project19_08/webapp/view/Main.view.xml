@@ -16,7 +16,7 @@
 
         <ux:headerTitle>
             <ux:ObjectPageHeader objectTitle="Section sample"></ux:ObjectPageHeader>
-        </ux:headerTitle>
+        </ux:headerTitle> 
 
         <ux:headerContent>
             <!-- <ObjectAttribute title="" text="This example explains the rules for the

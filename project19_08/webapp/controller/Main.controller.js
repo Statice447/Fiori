@@ -16,9 +16,7 @@ sap.ui.define(
             return Controller.extend("odata.project1908.controller.Main", {
                 onInit: function () {
                     var oModel = new JSONModel({CustomerID: ''});
-
                     this.getView().setModel(oModel, "main");
-
                 },
 
                 onSearch: function () {
