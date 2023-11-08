@@ -27,21 +27,24 @@ sap.ui.define(
 
                 this.byId("detail").setTitle("OrderID : " + oArgu.OrderID);
                 this.byId("idDetailInput").setValue("CustomID : " + oArgu.option);
-
-                let oModel = this.getView().getModel('main');
+                
+                let oModel = new JSONModel({});
+                this.getView().setModel(oModel,'main');
+                let oJSONModel = this.getView().getModel('main');
 
                 // 'Orders(번호)' 데이터 바인딩 ( ' 아님 ` 이거임)
                 // 엘리먼트 바인딩
-                this.getView().bindElement(`/Orders(${oArgu.OrderID})`);
+                // this.getView().bindElement(`/Orders(${oArgu.OrderID})`);
 
                 this.getView().getModel().read(`/Orders(${oArgu.OrderID})`, {
                     success : function(oReturn){
                         // 서버에서 얻은 값을 success 함수의 파라미터 변수 값에서 JSON Data 형태로 얻을 수 있다.
-                        // oModel.setProperty("/", oReturn);
-                        // oModel.setData(oReturn);
-                        // this.getView().getModel('main').setData(oReturn);
+                        oJSONModel.setProperty("/", oReturn);
+                        // oJSONModel.setData(oReturn);
+                        // this.getView().getModel().setData(oReturn);
 
-                        oReturn.results;
+                        // oReturn.results;
+                        debugger;
                     }.bind(this)        // success 함수 안에서 this 사용 시 .bind(this)를 사용
                 })
 
