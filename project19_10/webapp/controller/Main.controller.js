@@ -14,6 +14,27 @@ sap.ui.define([
             onInit: function () {
                 this._setChartInView();
                 this._setChartInContoller();
+                this._setMicroChart();
+            },
+
+            _setMicroChart(){
+                let oModel = new JSONModel();
+                oModel.loadData("../model/Products.json");
+                this.getView().setModel(oModel, 'micro');
+
+                let loModel = this.getView().getModel("micro");
+                let loData = loModel.getProperty("/Products");
+
+                let micro = this.byId("idMicro");
+
+
+                debugger;
+
+                micro.setvalueColor("");
+
+                
+
+                
             },
 
             _setChartInView(){
