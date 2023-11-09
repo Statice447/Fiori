@@ -27,7 +27,7 @@ sap.ui.define([
                 let oArgu = oEvent.getParameters().arguments;
 
                 // 타이틀 변경
-                this.byId("idDetailpage").setTitle(oArgu.ProductName + "상품의 주문 조회");
+                this.byId("idDetailpage").setTitle(oArgu.ProductName + " 상품의 주문 조회");
 
                 // 모델 선언
                 let oExtendModel = this.getView().getModel('extend');

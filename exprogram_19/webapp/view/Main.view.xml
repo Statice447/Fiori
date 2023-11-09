@@ -31,7 +31,6 @@
                                     id="SimpleForm"
                                     editable="false"
                                     layout="ResponsiveGridLayout"
-                                    title="Address"
                                     singleContainerFullSize="false">
 
                                     <f:content>
