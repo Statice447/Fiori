@@ -1,0 +1,55 @@
+<mvc:View
+    controllerName="exam.exprogram19.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+    <Page id="idDetailpage" title="" showNavButton="true" navButtonPress="onBack">
+        <content>
+            <Table
+                id="idTable"
+                items="{extend>/results}"
+                mode="SingleSelectMaster">
+                <columns>
+                    <Column>
+                        <Text text="주문 ID"/>
+                    </Column>
+                    <Column>
+                        <Text text="상품 이름"/>
+                    </Column>
+                    <Column>
+                        <Text text="상품 금액"/>
+                    </Column>
+                    <Column>
+                        <Text text="상품 수량"/>
+                    </Column>
+                    <Column>
+                        <Text text="할인률"/>
+                    </Column>
+                    <Column>
+                        <Text text="총 금액"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem vAlign="Middle" press="onSelect">
+                        <cells>
+                            <Text text="{extend>OrderID}"/>
+                            <Text text="{extend>ProductName}"/>
+                            <Text text="{extend>UnitPrice}"/>
+                            <Text text="{extend>Quantity}"/>
+                            <Text text="{extend>Discount}"/>
+                            <Text text="{extend>ExtendedPrice}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+
+</mvc:View>
