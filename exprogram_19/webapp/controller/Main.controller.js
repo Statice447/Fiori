@@ -59,9 +59,11 @@ sap.ui.define([
                     let oFilter = new Filter('CategoryID', 'GE', idID.getValue())
                     afilter.push(oFilter);
                 }
-
+                // 기존에 했던 Statwith는 시작 문구에 포함되면 조건에 부합하는 거였다
+                // Contains는 해당 값이 포함하는 것들을 조건으로 삼는다
+                
                 if (idCategoty.getValue()) {
-                    let oFilter = new Filter('CategoryName', 'StartsWith', idCategoty.getValue())
+                    let oFilter = new Filter('CategoryName', 'Contatins', idCategoty.getValue())
                     afilter.push(oFilter);
                 }
 
