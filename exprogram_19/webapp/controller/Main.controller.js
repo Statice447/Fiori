@@ -38,12 +38,12 @@ sap.ui.define([
                 let oProductModel = this.getView().getModel('main');
                 let oChartModel = this.getView().getModel('chart');
 
-                // 카테고리 원상 복구 용 빈 필터
-                let afilter = [];
-
                 // 빈 객체 setData로 모델 초기화(차트, 상품 조회 테이블)
                 oProductModel.setData([]);
                 oChartModel.setData([]);
+
+                // 카테고리 원상 복구 용 빈 필터
+                let afilter = [];
 
                 // 카테고리 원상 복구용 빈 필터 적용
                 this.getView().byId("idCategoryTable").getBinding("items").filter(afilter);
