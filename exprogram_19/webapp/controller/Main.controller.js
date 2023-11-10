@@ -82,14 +82,14 @@ sap.ui.define([
                 if (oData) {
                     var oFilter = new Filter('CategoryID', 'EQ', oData);
                     afilter.push(oFilter);
-                }
+                };
 
                 this.getView().getModel().read(`/Products`, {
                     filters : afilter,
                     success : function(oReturn){
                         oProductModel.setProperty("/", oReturn);
                     }
-                })
+                });
 
                 this.getView().getModel().read(`/Sales_by_Categories`, {
                     filters : afilter,
@@ -97,7 +97,7 @@ sap.ui.define([
                         oChartModel.setProperty("/", oReturn);          
 
                     }
-                })
+                });
             },
 
             selectdata(oEvent){
