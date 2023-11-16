@@ -28,9 +28,9 @@ sap.ui.define([
                 let micro = this.byId("idMicro");
 
 
-                debugger;
+                // debugger;
 
-                micro.setvalueColor("");
+                // micro.setvalueColor("");
 
                 
 
