@@ -39,6 +39,7 @@ sap.ui.define(
                 this.getView().getModel().read(`/Orders(${oArgu.OrderID})`, {
                     success : function(oReturn){
                         // 서버에서 얻은 값을 success 함수의 파라미터 변수 값에서 JSON Data 형태로 얻을 수 있다.
+                        debugger;
                         oJSONModel.setProperty("/", oReturn);
                         // oJSONModel.setData(oReturn);
                         // this.getView().getModel().setData(oReturn);

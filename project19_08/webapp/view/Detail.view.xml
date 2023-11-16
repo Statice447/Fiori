@@ -12,10 +12,10 @@
             <Button text="main으로" press="onNavMain"></Button>
         </content>
         <VBox >
-            <Text text="{OrderID}" />
-            <Text text="{CustomerID}" />
-            <Text text="{ShipName}"/>
-            <Text text="{ShipAddress}"/>
+            <Text text="{main>/OrderID}" />
+            <Text text="{main>/CustomerID}" />
+            <Text text="{main>/ShipName}"/>
+            <Text text="{main>/ShipAddress}"/>
             <Button id="idDetailButton" text="123" press="onRead" />
         </VBox> 
 
