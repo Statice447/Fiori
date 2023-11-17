@@ -22,8 +22,31 @@
             <ObjectPageDynamicHeaderTitle>
                 <expandedHeading>
                     <m:Title id="headerKey" text="" wrapping="true" class="sapUiSmallMarginEnd"/>
-
                 </expandedHeading>
+
+
+                <navigationActions>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://full-screen"
+                        press="handleFullScreen"
+                        id="enterFullScreenBtn"
+                        tooltip="Enter Full Screen Mode"
+                        visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://exit-full-screen"
+                        press="handleExitFullScreen"
+                        id="exitFullScreenBtn"
+                        tooltip="Exit Full Screen Mode"
+                        visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://decline"
+                        press="handleClose"
+                        tooltip="Close middle column"
+                        visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+                </navigationActions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
 
@@ -46,19 +69,14 @@
                                     <m:Toolbar>
                                         <m:Button id="idback" text="이전 화면" press="handleClose" width="8rem"/>
 
-                                        <m:ToolbarSpacer />
-                                        <m:Button
-                                                    id="idflag"
-                                                    text=""
-                                                    type="Emphasized"
-                                                    width="8rem"
-                                                    press="onDelflag"/>
+                                        <m:ToolbarSpacer/>
+                                        <m:Button id="idflag" text="" type="Emphasized" width="8rem" press="onDelflag"/>
                                     </m:Toolbar>
-                                    
+
                                     <m:Label text="BOM ID"/>
                                     <m:Text id="BOMitemid" text=""/>
                                     <m:Label text="품목명"/>
-                                    <m:Text id="GDNAMEid" text=""/>   
+                                    <m:Text id="GDNAMEid" text=""/>
                                 </form:content>
                             </form:SimpleForm>
                         </blocks>
@@ -74,7 +92,14 @@
                                 id="BOMitemTable"
                                 mode="SingleSelectMaster"
                                 itemPress="handleItemPress"
-                                items="{/BOM_ISet}">
+                                items="{ 
+                                    path  : '/BOM_ISet',
+                                    sorter : [{
+                                        path : 'GdcodeM',
+                                        descending : false
+                                        }]
+                                }"
+                                >
                                 <m:headerToolbar>
                                     <m:OverflowToolbar>
                                         <m:content>
@@ -97,9 +122,6 @@
                                     </m:Column>
                                     <m:Column>
                                         <m:Text text="수량"/>
-                                    </m:Column>
-                                    <m:Column>
-                                        <m:Text text="테스트 수량"/>
                                     </m:Column>
                                     <m:Column>
                                         <m:Text text="단위"/>

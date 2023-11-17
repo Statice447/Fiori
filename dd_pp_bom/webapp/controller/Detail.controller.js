@@ -37,7 +37,7 @@ sap.ui.define(
          */
         _onPatternMatched: function (oEvent) {
           let oParam = oEvent.getParameters().arguments,
-          oFilter = new Filter('Bomid', 'EQ', oParam.BOMid);
+              oFilter = new Filter('Bomid', 'EQ', oParam.BOMid);
 
           this.byId("headerKey").setText(oParam.BOMid);
           this._product = oParam.BOMid;
@@ -61,11 +61,11 @@ sap.ui.define(
         },
 
       onDelflag(oEvent) {
-        let btnText = oEvent.getSource().getText();
-        let oModel = this.getView().getModel();
-        let oBomid = this.byId("BOMitemid").getText();
-        let obj = this.getView().getModel().getObject(`/BOM_HSet('${oBomid}')`);
-
+        debugger;
+        let btnText = oEvent.getSource().getText(),
+            oModel = this.getView().getModel(),
+            oBomid = this.byId("BOMitemid").getText(),
+            obj = this.getView().getModel().getObject(`/BOM_HSet('${oBomid}')`);
         // read 함수에서 필터링을 한 후 해당 delflag 업데이트
          switch(btnText){
           case '가동중지' :
