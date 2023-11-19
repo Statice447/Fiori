@@ -1,7 +1,237 @@
-<mvc:View controllerName="ddppprdmanager.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
+<mvc:View
+    controllerName="ddppprdmanager.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:f="sap.f"
+    xmlns:tnt="sap.tnt"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz="sap.viz.ui5.controls">
+    <Page id="page" title="생산 현황">
+
+        <IconTabBar id="idIconTabBar" select=".onFilterSelect">
+            <items>
+                <!-- <IconTabFilter showAll="true"
+                count="{/ProductCollectionStats/Counts/Total}" text="Products" key="All"/> -->
+                <IconTabSeparator/>
+                <IconTabFilter
+                    icon="sap-icon://factory"
+                    iconColor="Tile"
+                    count="{/ProductCollectionStats/Counts/Weight/Ok}"
+                    text="생산 중"
+                    key="Production"/>
+                <IconTabFilter
+                    icon="sap-icon://commission-check"
+                    iconColor="Critical"
+                    count="{/ProductCollectionStats/Counts/Weight/Heavy}"
+                    text="검수 대기"
+                    key="WaitChecking"/>
+                <IconTabFilter
+                    icon="sap-icon://complete"
+                    iconColor="Positive"
+                    count="{/ProductCollectionStats/Counts/Weight/Overweight}"
+                    text="생산 완료"
+                    key="Complete"/>
+                <IconTabFilter icon="sap-icon://ipad" iconColor="Default" text="전체" key="All"/>
+            </items>
+
+            <content>
+                <fb:FilterBar
+                    id="filterbar"
+                    persistencyKey="myPersKey"
+                    useToolbar="false"
+                    search=".onSearch"
+                    filterChange=".onFilterChange"
+                    afterVariantLoad=".onAfterVariantLoad">
+                    <fb:filterGroupItems>
+                        <fb:FilterGroupItem
+                            name="PlantCode"
+                            label="PlantCode"
+                            groupName="Group1"
+                            visibleInFilterBar="true">
+                            <fb:control>
+                                <ComboBox
+                                    id="comboid"
+                                    name="PlantCode"
+                                    showSecondaryValues="true"
+                                    selectionChange=".onSelectionChange"
+                                    items="{
+                                            path: '/PlantSet',
+                                            templateShareable: true
+										}">
+                                    <core:ListItem key="{Plcode}" text="{Plcode}" additionalText="{Plname}"/>
+                                </ComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+                <l:Grid
+                    containerQuery="true"
+                    class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+                    <VBox>
+                        <layoutData>
+                            <l:GridData span="XL2 L2 M12 S12"/>
+                        </layoutData>
+                        <t:TreeTable
+                            id="TreeTableBasic"
+                            width="12.5rem"
+                            rows="{
+                            path:'tree>/catalog/year',
+                            parameters: {arrayNames:['categories']}
+                            }"
+                            selectionMode="Single"
+                            enableSelectAll="false"
+                            ariaLabelledBy="title">
+                            <t:extension>
+                                <OverflowToolbar style="Clear">
+                                    <ToolbarSpacer/>
+                                    <Button text="조회" type="Emphasized" press="onTree"/>
+                                    <!-- <Button text="Collapse all" press="onCollapseAll"/> <Button text="Collapse
+                                    selection" press="onCollapseSelection"/> <Button text="Expand first level"
+                                    press="onExpandFirstLevel"/> <Button text="Expand selection"
+                                    press="onExpandSelection"/> -->
+                                </OverflowToolbar>
+                            </t:extension>
+                            <t:columns>
+                                <t:Column >
+                                    <Label text="연도"/>
+                                    <t:template>
+                                        <Text text="{tree>name}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                            </t:columns>
+                        </t:TreeTable>
+
+                    </VBox>
+                    <VBox>
+                        <layoutData>
+                            <l:GridData span="XL10 L10 M12 S12"/>
+                        </layoutData>
+                        <t:Table
+                            id="ProductTable"
+                            rows="{main>/Prdmanage}"
+                            visibleRowCount="12"
+                            selectionMode="None"
+                            rowSelectionChange="onProductSelect"
+                            paste="onPaste"
+                            ariaLabelledBy="title">
+                            <t:extension>
+                                <OverflowToolbar style="Clear">
+                                    <Title text="생산 현황 조회"/>
+                                </OverflowToolbar>
+                            </t:extension>
+                            <t:columns>
+                                <t:Column width="15%">
+                                    <Label text="생산관리번호" width="111%"/>
+                                    <t:template>
+                                        <Text text="{main>Prmnum}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="6%">
+                                    <Label text="공장명"/>
+                                    <t:template>
+                                        <Text text="{main>Plname}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="8%">
+                                    <Label text="품목코드"/>
+                                    <t:template>
+                                        <Text text="{main>Gdcode}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column >
+                                    <Label text="품목명" width="30%"/>
+                                    <t:template>
+                                        <Text text="{main>Gdname}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="End" width="8%">
+                                    <Label text="생산수량"/>
+                                    <t:template>
+                                        <Text text="{main>Quan}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="5%">
+                                    <Label text="단위"/>
+                                    <t:template>
+                                        <Text text="{main>Unit}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="10%">
+                                    <Label text="생산시작일"/>
+                                    <t:template>
+                                        <Text
+                                            text="{
+                                            path: 'main>Ppstdat',
+                                            formatter: '.formatter.fnDateToString'}"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="10%">
+                                    <Label text="예상종료일"/>
+                                    <t:template>
+                                        <Text
+                                            text="{
+                                            path: 'main>Ppeddat',
+                                            formatter: '.formatter.fnDateToString'}"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="3%">
+                                    <Label text="상태"/>
+                                    <t:template>
+                                        <core:Icon
+                                            src="{
+                                                path : 'main>Status',
+                                                formatter : '.formatter.fnStatustoIcon'
+                                             }"
+                                            color="{
+                                                path : 'main>Status',
+                                                formatter : '.formatter.fnIconColor'
+                                             }"/>
+                                    </t:template>
+                                </t:Column>
+                            </t:columns>
+                        </t:Table>
+
+                        <viz:VizFrame
+                            id="Chart"
+                            uiConfig="{applicationSet:'fiori'}"
+                            vizProperties="{
+                                'title' : { 'visible' : true , text : '생산완료 차트'},
+                                'legendGroup':{layout:{position: 'right'}},
+                                'plotArea': {
+                                    drawingEffect: 'glossy',
+                                    dataLabel: { visible: true, type:'value'}
+                                }
+                            }"
+                            width="100%"
+                            vizType='pie'
+                            selectData="onSelectData">
+                            <viz:dataset>
+                                <viz.data:FlattenedDataset data="{main>/Chart}">
+                                    <viz.data:dimensions>
+                                        <viz.data:DimensionDefinition name="상품명" value="{main>Gdname}"/>
+                                    </viz.data:dimensions>
+                                    <viz.data:measures>
+                                        <viz.data:MeasureDefinition name="생산량" value="{main>Quan}"/>
+                                    </viz.data:measures>
+                                </viz.data:FlattenedDataset>
+                            </viz:dataset>
+
+                            <viz:feeds>
+                                <viz.feeds:FeedItem uid="size" type="Measure" values="생산량"/>
+                                <viz.feeds:FeedItem uid="color" type="Dimension" values="상품명"/>
+                            </viz:feeds>
+                        </viz:VizFrame>
+                    </VBox>
+                </l:Grid>
+            </content>
+        </IconTabBar>
+
     </Page>
 </mvc:View>
