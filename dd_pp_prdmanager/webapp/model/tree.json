@@ -1,7 +1,7 @@
 {
     "catalog": {
         "year": { "name" : "2023" ,  "categories" : [ 
-            { "name" : "2022", "categories" : [
+            { "id" : "year", "name" : "2022", "categories" : [
                 { "year" : 2022, "month" : "01","name": "1월 생산량" },
                 { "year" : 2022, "month" : "02","name": "2월 생산량" },
                 { "year" : 2022, "month" : "03","name": "3월 생산량" },
@@ -15,7 +15,7 @@
                 { "year" : 2022, "month" : "11","name": "11월 생산량" },
                 { "year" : 2022, "month" : "12","name": "12월 생산량" }
                 ] },
-            { "name" : "2023", "categories" : [
+            { "id" : "year", "name" : "2023", "categories" : [
                 { "year" : 2023, "month" : "01","name": "1월 생산량" },
                 { "year" : 2023, "month" : "02","name": "2월 생산량" },
                 { "year" : 2023, "month" : "03","name": "3월 생산량" },
