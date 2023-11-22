@@ -7,40 +7,43 @@
     <Popover
         id="idpopover"
         class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
-        placement="Bottom"
+        placement="Auto"
         initialFocus="email">
-        <content>
-        <viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}"
-                height='100%' width="100%" vizType='column'>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button id="idclose" text="닫기" type="Emphasized" press="onClose"/>
+
+            </OverflowToolbar>
+        </footer>
+         <viz:VizFrame
+                id="idChart2"
+                uiConfig="{applicationSet:'fiori'}"
+                vizProperties="{
+                                'title' : { 'visible' : true , text : '정상,불량 수량 확인'},
+                                'legendGroup':{layout:{position: 'right'}},
+                                'plotArea': {
+                                    drawingEffect: 'glossy',
+                                    dataLabel: { visible: true, type:'value'}
+                                }
+                            }"
+                vizType='bar'>
                 <viz:dataset>
-                    <viz.data:FlattenedDataset data="{/PrdmanagerSet}">
+                    <viz.data:FlattenedDataset data="{main>/Chart}">
                         <viz.data:dimensions>
-                            <viz.data:DimensionDefinition name="Gdname"
-                                value="{Gdname}" />
+                            <viz.data:DimensionDefinition id="idbargdname" name="상품명" value="{main>Gdname}"/>
                         </viz.data:dimensions>
                         <viz.data:measures>
-                            <viz.data:MeasureDefinition name="Quan"
-                                value="{Quan}" />
+                            <viz.data:MeasureDefinition name="정상수량" value="{main>Noquan}"/>
+                            <viz.data:MeasureDefinition name="불량수량" value="{main>Dequan}"/>
                         </viz.data:measures>
                     </viz.data:FlattenedDataset>
                 </viz:dataset>
 
                 <viz:feeds>
-                    <viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure"
-                        values="Quan" />
-                    <viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension"
-                        values="Gdname" />
+                    <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="정상수량,불량수량"/>
+                    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="상품명"/>
                 </viz:feeds>
             </viz:VizFrame>
-        </content>
-        
-        <footer>
-            <OverflowToolbar>
-                <ToolbarSpacer/>
-                <Button id="idclose" text="close" press="onClose"/>
-
-            </OverflowToolbar>
-        </footer>
-        
     </Popover>
 </core:FragmentDefinition>
